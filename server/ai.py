@@ -3,8 +3,14 @@ from google.genai import types
 import os
 
 key=os.environ.get('GEMINI_API_KEY')
-print("Your API_Key is: "+key)
-client = genai.Client(api_key=key)
+if key is not None:
+    print("Your API_Key is: " + key)
+else:
+    print("API_Key is not set.")
+
+client = genai.Client(api_key = key)
+
+
 
 
 class Chatbot:
