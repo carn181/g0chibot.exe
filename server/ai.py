@@ -21,12 +21,3 @@ class Chatbot:
         response=self.chat.send_message(msg)
         return response
 
-
-chat=Chatbot("2000's guy", "For any of the following messages, speak like a 18 year old l33t hacker boy on the 2000's internet. I will communicate with you like I'm on MySpace and you should respond like then. You should give me a fun fact of the 2000's internet as well when I ask. Never give huge paragraphs, and give new sentences on new lines.")
-chat.init()
-
-for i in range(10):
-    message=input("Input: ")
-    response = chat.send_msg(message)
-    print(response.text)
-

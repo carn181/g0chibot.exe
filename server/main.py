@@ -2,14 +2,10 @@ from flask import Flask, request, jsonify
 from google import genai
 from google.genai import types
 import os
+import ai
 
 app = Flask(__name__)
 
-# Load Gemini API key
-key = os.environ.get('GEMINI_API_KEY')
-if not key:
-    raise ValueError("Missing GEMINI_API_KEY environment variable.")
-client = genai.Client(api_key=key)
 
 # Session store for multiple chatbots
 chat_sessions = {}
@@ -21,16 +17,12 @@ system_instruction = (
     "You should give me a fun fact of the 2000's internet as well when I ask. "
     "Never give huge paragraphs, and give new sentences on new lines."
 )
-
+chatbot1 = ai.Chatbot("Jack", system_instruction)
 @app.route('/chatbot/<int:num>/initialize', methods=['POST'])
 def initialize_chat(num):
     # Create Gemini chat with style
-    chat = client.chats.create(
-        model="gemini-2.0-flash",
-        config=types.GenerateContentConfig(system_instruction=system_instruction)
-    )
     chat_sessions[num] = {
-        "chat": chat,
+        "chat": [],
         "history": []
     }
     return jsonify({"message": f"Chatbot {num} initialized."})
@@ -47,7 +39,7 @@ def send_message(num):
     chat = chat_sessions[num]["chat"]
 
     try:
-        response = chat.send_message(user_msg)
+        response = chatbot1.send_msg(user_msg)
         bot_reply = response.text
         chat_sessions[num]["history"].append({"user": user_msg, "bot": bot_reply})
         return jsonify({"response": bot_reply})
