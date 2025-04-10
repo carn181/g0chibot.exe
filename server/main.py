@@ -17,7 +17,6 @@ system_instruction = (
     "You should give me a fun fact of the 2000's internet as well when I ask. "
     "Never give huge paragraphs, and give new sentences on new lines."
 )
-chatbot1 = ai.Chatbot("Jack", system_instruction)
 @app.route('/chatbot/<int:num>/initialize', methods=['POST'])
 def initialize_chat(num):
     # Create Gemini chat with style
@@ -25,6 +24,7 @@ def initialize_chat(num):
         "chat": [],
         "history": []
     }
+    ai.chatbot1.init()
     return jsonify({"message": f"Chatbot {num} initialized."})
 
 @app.route('/chatbot/<int:num>/sendmsg', methods=['POST'])
@@ -39,7 +39,7 @@ def send_message(num):
     chat = chat_sessions[num]["chat"]
 
     try:
-        response = chatbot1.send_msg(user_msg)
+        response = ai.chatbot1.send_msg(user_msg)
         bot_reply = response.text
         chat_sessions[num]["history"].append({"user": user_msg, "bot": bot_reply})
         return jsonify({"response": bot_reply})
