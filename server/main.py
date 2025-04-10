@@ -40,7 +40,7 @@ def send_message(num):
 
     try:
         response = ai.chatbot1.send_msg(user_msg)
-        bot_reply = response.text
+        bot_reply = response
         chat_sessions[num]["history"].append({"user": user_msg, "bot": bot_reply})
         return jsonify({"response": bot_reply})
     except Exception as e:
