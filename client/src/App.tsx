@@ -1,35 +1,45 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { MenuList, MenuListItem, Separator, styleReset } from 'react95';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 
-function App() {
-  const [count, setCount] = useState(0)
+/* Pick a theme of your choice */
+import original from 'react95/dist/themes/original';
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+/* Original Windows95 font (optional) */
+import ms_sans_serif from 'react95/dist/fonts/ms_sans_serif.woff2';
+import ms_sans_serif_bold from 'react95/dist/fonts/ms_sans_serif_bold.woff2';
 
-export default App
+const GlobalStyles = createGlobalStyle`
+  ${styleReset}
+  @font-face {
+    font-family: 'ms_sans_serif';
+    src: url('${ms_sans_serif}') format('woff2');
+    font-weight: 400;
+    font-style: normal
+  }
+  @font-face {
+    font-family: 'ms_sans_serif';
+    src: url('${ms_sans_serif_bold}') format('woff2');
+    font-weight: bold;
+    font-style: normal
+  }
+  body, input, select, textarea {
+    font-family: 'ms_sans_serif';
+  }
+`;
+
+const App = () => (
+  <div>
+    <GlobalStyles />
+    <ThemeProvider theme={original}>
+      <MenuList>
+        <MenuListItem>🎤 Sing</MenuListItem>
+        <MenuListItem>💃🏻 Dance</MenuListItem>
+        <Separator />
+        <MenuListItem disabled>😴 Sleep</MenuListItem>
+      </MenuList>
+    </ThemeProvider>
+  </div>
+);
+
+export default App;
