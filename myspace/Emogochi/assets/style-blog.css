@@ -1,0 +1,856 @@
+:root {
+  --tables-bg-color: #fff; /* Default light theme */
+  --h1-post-title-text-color:#000000;
+  --h2-post-title-text-color:#000000;
+  --post-text-color:#000000;
+  --post-small-text-color: #303030;
+  --post-date-text-color: #1d1d1d;
+  --link-text-color: #0000FF;
+  --link-hover-text-color: #cc0000;
+  --profile-text-color: #000000;
+  --profile-links-text-color: #0000FF;
+  --contact-table-bg-color: #ffffff;
+  --contact-header-bg-color: #6799C5;
+  --contact-table-border-color: 2px solid #6799C5;
+  --contact-header-text-color: #fff;
+  --h1-blog-archive-text-color: #000;
+  --blog-archive-post-date-text-color: #0e0e0e;
+  --blog-archive-post-title-link-color: #0000FF;
+  --blog-archive-post-title-link-hover-color: #cc0000;
+  --divider-bg-color: #ddd;
+  --post-ul-color: #000000;
+  --post-li-color: #000000;
+}
+
+[data-theme="dark"] {
+  --tables-bg-color: #0C0E18; /* Dark theme */
+  --h1-post-title-text-color:#d7e4ff;
+  --h2-post-title-text-color:#d7e4ff;
+  --post-text-color:#d7e4ff;
+  --post-small-text-color: #d7e4ff;
+  --post-date-text-color: #abb4c7;
+  --link-text-color: #9191ff;
+  --link-hover-text-color: #ff7777;
+  --profile-text-color: #d7e4ff;
+  --profile-links-text-color: #9191ff;
+  --contact-table-bg-color: #0C0E18;
+  --contact-header-bg-color: #28283b;
+  --contact-table-border-color: 2px solid #28283b;
+  --contact-header-text-color: #d7e4ff;
+  --h1-blog-archive-text-color: #d7e4ff;
+  --blog-archive-post-date-text-color: #d7e4ff;
+  --blog-archive-post-title-link-color: #9191ff;
+  --blog-archive-post-title-link-hover-color: #ff7777;
+  --divider-bg-color: #28283b;
+  --post-ul-color: #d7e4ff;
+  --post-li-color: #d7e4ff;
+}
+
+.tables-container {
+  background-color: var(--tables-bg-color);
+}
+
+.table-wrapper {
+  background-color: var(--tables-bg-color);
+}
+
+.blog-post-container h1 {
+  color: var(--h1-post-title-text-color);
+}
+.blog-post-container h2 {
+  color: var(--h2-post-title-text-color);
+}
+.blog-post-container .post-content p {
+  color: var(--post-text-color);
+}
+.blog-post-container ul {
+  color: var(--post-ul-color);
+}
+.blog-post-container li {
+  color: var(--post-li-color);
+}
+
+
+.blog-post-container {
+  h1 {
+    color: var(--h1-post-title-text-color);
+  }
+  h2 {
+    color: var(--h2-post-title-text-color);
+  }
+  .post-content p {
+    color: var(--post-text-color);
+  }
+  .post-content small {
+    color: var(--post-small-text-color);
+  }
+  .post-date {
+    color: var(--post-date-text-color);
+  }
+}
+a:link, a:visited {
+  color: var(--link-text-color);
+}
+a:hover {
+  color: var(--link-hover-text-color);
+}
+
+.profile-container {
+  color: var(--profile-text-color);
+}
+
+.profile-links a {
+  color: var(--profile-links-text-color);
+}
+
+.contact-container {
+  background-color: var(--contact-table-bg-color);
+  border: var(--contact-table-border-color);
+}
+.contact-header {
+  background-color: var(--contact-header-bg-color);
+  color: var(--contact-header-text-color);
+}
+
+.blog-archive h1 {
+  color: var(--h1-blog-archive-text-color);
+}
+
+.post-date {
+  color: var(--blog-archive-post-date-text-color);
+}
+
+.post-title a {
+  color: var(--blog-archive-post-title-link-color);
+}
+
+.post-title a:hover {
+  color: var(--blog-archive-post-title-link-hover-color);
+
+}
+.tables-container::after {
+  background-color: var(--divider-bg-color);
+}
+/* --------THEME-TOGGLE BUTTON STYLING------------- */
+#theme-toggle {
+  position: relative;
+  width: 50px; /* Square dimensions */
+  height: 50px;
+  background-color: #ffffff; /* Background */
+  border: 2.5px solid #003399; /* Border around the square */
+  border-radius: 5px; /* Slightly rounded corners */
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the circle inside */
+}
+
+/* Hover effect for the square button */
+#theme-toggle:hover,
+#theme-toggle:active {
+  background-color: #b8d0ff; /* BG Color */
+  border-color: #003399; /* Border Color*/
+  transform: translate(3px, 3px); /* Optional: Shift button down-right */
+}
+
+/* Circle inside the square button */
+#theme-toggle::before {
+  content: '';
+  position: absolute;
+  width: 19px; /* Circle size */
+  height: 19px;
+  background: linear-gradient(to right, #ffffff 50%, #003399 50%);
+  border: 2.5px solid #003399; /* Initial border around the circle */
+  border-radius: 50%; /* Makes it circular */
+  z-index: 1; /* Above the button */
+  transition: background 0.3s ease, border-color 0.3s ease; /* Match button timing */
+}
+
+/* Dark theme toggle */
+[data-theme="dark"] #theme-toggle {
+  background-color: #101011; /* Button background */
+  border-color: #555; /* Border */
+
+}
+
+[data-theme="dark"] #theme-toggle:hover,
+[data-theme="dark"] #theme-toggle:active {
+  background-color: #18181d; /* Dark mode hover */
+  border-color: #666; /* Border color */
+  transform: translate(3px, 3px); /* Optional: Shift button down-right */
+}
+
+[data-theme="dark"] #theme-toggle::before {
+  background: linear-gradient(to right, black 50%, white 50%);
+  border-color: #ffffff; /* Border color */
+}
+
+/* Fixed position for bottom-right placement */
+#theme-toggle {
+  position: fixed;
+  bottom: 20px; /* Distance from the bottom */
+  right: 20px; /* Distance from the right */
+  z-index: 1000; /* Ensure it’s above other elements */
+}
+
+html {
+  /* ADDS SCROLL BAR TO PAGES THAT DON'T HAVE SCROLLING LENGTH */
+  overflow-y: scroll;
+  /* FIXES MOBILE TEXT SCALING ISSUES */
+  -webkit-text-size-adjust: 100%; /* For Safari/Chrome */
+  -moz-text-size-adjust: 100%; /* For Firefox */
+  -ms-text-size-adjust: 100%; /* For IE */
+  text-size-adjust: 100%; /* Standard property */
+  
+}
+
+body {
+  background-image: url('../images/stars2-BG.gif');
+  background-color: #000; 
+  font-family: verdana;
+  font-size: 12px;
+}
+
+a:link, a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.hidden {
+  display: none;
+}
+
+/* HEADER (MAIN MYSPACE BLUE) */
+.header {
+  position: relative;
+  width: 1120px; /* Updated to match new container width */
+  height: 100px;
+  margin: 0 auto;
+  padding-top: 0px; /* Change padding to 0 if no Xmas lights, 14px yes there are Xmas lights */
+  background-color: #003399;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.header-content {
+  position: relative;
+  z-index: 4;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 434px;
+}
+
+.youtube-banner {
+  position: relative;
+  margin-top: 20px;
+  user-select: none;
+  pointer-events: none;
+  margin-left: 300px;
+}
+
+.logo-link img {
+  user-select: none;
+  pointer-events: none;
+}
+
+
+/* CHRISTMAS SNOW */
+/* Common styles for all snow layers */
+.snow-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1120px; /* Updated to match new header width */
+  height: 116px;
+  pointer-events: none;
+  background-repeat: repeat;
+}
+
+/* First snow layer animation */
+.snow-layer-1 {
+  z-index: 2;
+  background-image: url('../images/snow.png');
+  animation: snow-layer-1 12s linear infinite;
+}
+
+/* Second snow layer animation */
+.snow-layer-2 {
+  z-index: 1;
+  background-image: url('../images/snow-2.png');
+  animation: snow-layer-2 22s linear infinite;
+}
+
+/* Snow animations */
+@keyframes snow-layer-1 {
+  from {
+      background-position: 0 0;
+  }
+  to {
+      background-position: 300px 300px; /* Diagonal movement */
+  }
+}
+
+@keyframes snow-layer-2 {
+  from {
+      background-position: 0 0;
+  }
+  to {
+      background-position: 400px 400px; /* Slower and diagonal movement */
+  }
+}
+
+/* CHRISTMAS LIGHTS */
+.christmas-lights {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1120px; /* Updated to match new header width */
+  height: 16px;
+  z-index: 3;
+  background-image: url('../images/christmas-lights.gif');
+  background-repeat: repeat-x;
+  background-size: auto 16px;
+  background-position: top;
+}
+
+
+/* TABLES CONTAINER */
+.tables-container {
+  display: flex;
+  flex-wrap: nowrap;
+  width: 1120px; /* Total container width */
+  margin: 0 auto; /* Center the entire container */
+  gap: 11px;
+  position: relative; 
+}
+
+/* FIRST TABLE WRAPPER */
+.table-wrapper {
+  flex: 0 0 346px;
+  margin-bottom: 13px;
+  padding-bottom: 10px;
+  margin-left: 20px;
+}
+
+/* SECOND TABLE WRAPPER */
+.table-wrapper-2 {
+  flex: 0 0 740px; /* Adjusted width to align flush with the container */
+  background-color: transparent;
+  margin-bottom: 13px; /* Same margin as the first table wrapper */
+  padding-bottom: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Adjusted Top Spacing */
+.table-wrapper-2 {
+  margin-top: -25px; /* Ensures consistent spacing with the first table wrapper */
+}
+
+
+/* PROFILE SECTION */
+.profile-container {
+    font-family: Verdana, sans-serif;
+    max-width: 304px;
+    background-color: transparent;
+    margin: 0;
+    align-self: flex-start;
+}
+
+.profile-header {
+    text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.profile-body {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+}
+
+.profile-image {
+    position: relative;
+    flex: 0 0 181px;
+}
+
+.profile-image img {
+    width: 181px;
+    height: 173px;
+    border-radius: 0px;
+    object-fit: cover;
+}
+
+.profile-text {
+    flex: 1;
+    font-size: 12px;
+    line-height: 1.2;
+    margin-top: 0;
+}
+
+.profile-mood {
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.profile-mood img {
+  height: 18px;
+  vertical-align: middle;
+  position: relative;
+  top: -2px; /* Adjust value to shift mood image */
+}
+
+.profile-links {
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+.profile-links a {
+  text-decoration: none;
+}
+
+.profile-links a:hover {
+  text-decoration: underline;
+  color: #cc0000;
+}
+
+/* ---------------- CONTACTING MAX SOCIAL MEDIA ---------------- */
+.contact-container {
+  width: 300px; /* Matches the width of the profile section */
+  font-family: 'Verdana', sans-serif;
+  font-size: 12px;
+  margin-top: 14px; /* Adds separation from profile */
+  margin-bottom: 13px;
+}
+
+.contact-header {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px;
+  text-align: left;
+}
+
+.contact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 6px; /* Space between columns */
+  padding: 4px; /* Adds spacing inside the container */
+}
+
+.contact-column {
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* Adds spacing between links in each column */
+}
+
+.contact-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  color: blue;
+  font-size: 12px;
+}
+
+.contact-link img {
+  margin-right: 5px;
+  vertical-align: middle;
+  height: 14px; /* Consistent icon size */
+}
+/* BLUE TITLE SECTIONS */
+.blue-section-wrapper {
+  font-family: Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.blue-table-container {
+  width: 300px;
+  margin: 0;
+  border: 2px solid #6799C5;
+  background-color: #6699CC;
+}
+
+.blue-header {
+  background-color: #6799C5;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 5px;
+  margin-bottom: 2px;
+  word-wrap: break-word;
+}
+
+.blue-content-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+}
+
+.blue-content-table th,
+.blue-content-table td {
+  padding: 3px;
+  text-align: left;
+  border: 3px solid #ffffff; /* Thicker borders */
+}
+
+.blue-content-table th {
+  width: 101px;
+  background-color: #B1D0EF;
+  color: #336699;
+  vertical-align: top;
+  text-align: left;
+  font-size: 12px;
+}
+
+.blue-content-table td {
+  background-color: #D5E7FF;
+  color: #000000;
+  font-size: 12px;
+  word-wrap: break-word;
+}
+
+/* --------------- AUDIO PLAYER ----------------- */
+.audio-player {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(145deg, #b0b0b0, #e0e0e0);
+  border: 2px solid #808080;
+  width: 288px;
+  padding: 6px;
+  font-family: Arial, sans-serif;
+  }
+  /* Play button */
+  .audio-player button {
+  background: linear-gradient(45deg, #444, #999); /* Metallic gradient */
+  color: #fff;
+  border: none;
+  width: 55px;
+  height: 55px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+  .audio-player button:hover {
+  background: linear-gradient(45deg, #222, #777); /* Button darker on hover */
+  }
+  /* Song information */
+  .audio-info {
+  flex-grow: 1;
+  margin-left: 10px;
+  text-align: left;
+  margin-bottom: -4px;
+  }
+  .audio-info .title {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 4px;
+  }
+  .audio-info .artist {
+  font-size: 10px;
+  color: #666;
+  }
+  /* Volume Slider */
+  .volume-slider {
+  width: 100%;
+  margin-top: 0px;
+  }
+  .volume-slider input[type="range"] {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 5px;
+  background: linear-gradient(to right, #ff9800 75%, #e67e00 75%); /* Dynamic background */
+  border-radius: 5px;
+  outline: none;
+  }
+  .volume-slider input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: #ff9800;
+  border-radius: 50%;
+  cursor: pointer;
+  }
+  .volume-slider input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  background: #ff9800;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    width: 100%;
+    background-color: transparent;
+    color: #fff;
+    padding: 18px 0;
+    position: relative;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.footer p {
+    margin: 0 auto;
+    max-width: 1120px; /* Matches updated container width */
+}
+
+footer a {
+  color: #9fe2f8 !important; /* Light blue with !important to override */
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #87CEEB !important; /* Slightly darker blue on hover */
+}
+
+/* --------------- MEOW :3 ----------------- */
+.cat-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#cat-image {
+  width: 40px;
+  cursor: pointer;
+}
+
+.wiggle {
+  animation: wiggle 1s ease;
+}
+
+@keyframes wiggle {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(5deg); }
+  50% { transform: rotate(-5deg); }
+  75% { transform: rotate(5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+/* BLOG ARCHIVE SECTION */
+.blog-archive {
+  max-width: 680px; /* Same width limit as archive */
+  margin: 38px auto; /* Center the content */
+  line-height: 1.3; /* Improve readability */
+}
+
+/* Add Atkinson Hyperlegible font for H1 */
+.blog-archive h1 {
+  font-size: 38px; /* Same H1 size as archive */
+  font-weight: bold;
+  font-family: 'Atkinson Hyperlegible', sans-serif; /* H1-specific font */
+  margin-bottom: 20px; /* Space below heading */
+  margin-top: -8px;
+  line-height: 1.3; /* Improve readability */
+}
+
+.blog-posts {
+  font-family: Tahoma, sans-serif; /* Consistent typeface */
+  display: flex;
+  flex-direction: column;
+  gap: 16px; /* Space between posts */
+}
+
+.blog-post {
+  display: grid;
+  grid-template-columns: 150px auto; /* Fixed width for the date column, flexible for the title */
+  align-items: center; /* Align text vertically */
+  font-size: 20px;
+}
+
+.post-date {
+  text-decoration: none;
+}
+
+.post-title a {
+  text-decoration: underline; /* Underlined by default */
+}
+
+.post-title a:hover {
+  text-decoration: underline; /* Underline persists on hover */
+}
+
+/* BLOG POST SECTION */
+.blog-post-container {
+  font-family: Tahoma, sans-serif; /* Consistent typeface */
+  max-width: 680px; /* Same width limit as archive */
+  margin: 38px auto; /* Center the content */
+  line-height: 1.6; /* Improve readability */
+}
+
+.blog-post-container h1 {
+  font-size: 38px; /* Same H1 size as archive */
+  font-weight: bold;
+  font-family: 'Atkinson Hyperlegible', sans-serif; /* H1-specific font */
+  margin-bottom: -20px; /* Space below heading */
+  margin-top: 38px;
+  line-height: 1.3; /* Improve readability */
+}
+
+.blog-post-container h2 {
+  font-size: 26px; /* Same H1 size as archive */
+  font-weight: bold;
+  font-family: 'Atkinson Hyperlegible', sans-serif; /* H1-specific font */
+  margin-bottom: -20px; /* Space below heading */
+}
+.blog-post-container .post-date {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.blog-post-container .post-content p {
+  font-size: 18px;
+  margin-bottom: 20px; /* Space between paragraphs */
+}
+
+  /* General <p> styling inside articles */
+  .article p {
+    font-size: 18px; /* Match other text sizes */
+    line-height: 1; /* Improve readability for longer text */
+    margin-top: 0px; /* Space above the paragraph */
+    margin-bottom: 0px; /* Space below the paragraph */
+  }
+  
+  /* Change list styling */
+  .blog-post-container ul {
+    font-size: 18px; /* Keep consistent font size */
+    list-style: disc; /* Bullet points */
+    margin-top: -14px; /* Space above list */
+  }
+
+    /* Change list styling */
+    .blog-post-container ol {
+      font-size: 18px; /* Keep consistent font size */
+      margin-top: -14px; /* Space above list */
+    }
+
+    /* Change list styling */
+    .blog-post-container li {
+      font-size: 18px; /* Keep consistent font size */
+    }
+
+.blog-post-container .more-posts {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Space between link and H1 */
+  font-size: 14px; /* Size of the link text */
+  margin-bottom: -22px;
+  font-weight: bold;
+  text-decoration: underline; /* Underline persists on hover */
+}
+
+.blog-post-container .more-posts img {
+  height: 14px; /* Scale the notepad image */
+  margin-right: 8px; /* Space between image and text */
+}
+
+.blog-post-container .post-content img {
+  max-width: 620px; /* Restricts the width to a maximum of 620px */
+  height: auto; /* Maintains the aspect ratio */
+}
+
+.blog-post-container .post-content small {
+  display: block; /* Ensures the caption is on its own line */
+  font-size: 12px; /* Adjusts caption font size */
+  text-align: left; /* Aligns the caption to the left of the image */
+  margin-top: 7px; /* Space between the image and caption */
+  max-width: 620px; /* Ensures the caption matches the image width */
+  margin-left: auto; /* Centers the caption horizontally */
+  margin-right: auto; /* Centers the caption horizontally */
+  font-family: 'Courier New', Courier, monospace, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* Divider Between Columns */
+.tables-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 366px; /* Positioned between the two tables */
+  width: 1px;
+  z-index: 1; /* Ensure it stays between the tables */
+}
+
+/* MOBILE STYLING */
+@media screen and (max-width: 1120px) {
+  .blog-post-container h1 {
+    font-size: 38px; /* Same H1 size as archive */
+    font-weight: bold;
+    font-family: 'Atkinson Hyperlegible', sans-serif; /* H1-specific font */
+    margin-bottom: -20px; /* Space below heading */
+    margin-top: 38px;
+    line-height: 1.3; /* Improve readability */
+
+  }
+  .blog-post-container h2 {
+    font-size: 30px; 
+    font-weight: bold;
+    font-family: 'Atkinson Hyperlegible', sans-serif; 
+    
+  }
+  .blog-post-container .post-content p {
+    font-size: 26px;
+    margin-bottom: 20px; /* Space between paragraphs */
+
+  }
+
+  .blog-post-container .post-date {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .blog-post-container .more-posts {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Space between link and H1 */
+    font-size: 20px; /* Size of the link text */
+    margin-bottom: -22px;
+    font-weight: bold;
+    text-decoration: underline; /* Underline persists on hover */
+  }
+  
+  .blog-post-container .more-posts img {
+    height: 18px; /* Scale the notepad image */
+    margin-right: 8px; /* Space between image and text */
+  }
+
+  .blog-post-container .post-content small {
+    display: block; /* Ensures the caption is on its own line */
+    font-size: 20px; /* Adjusts caption font size */
+    text-align: left; /* Aligns the caption to the left of the image */
+    margin-top: 7px; /* Space between the image and caption */
+    max-width: 620px; /* Ensures the caption matches the image width */
+    margin-left: auto; /* Centers the caption horizontally */
+    margin-right: auto; /* Centers the caption horizontally */
+    font-family: 'Courier New', Courier, monospace, 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+
+  .blog-post-container li {
+    font-size: 26px; /* Adjusts caption font size */
+  }
+
+  .blog-post-container ul {
+    font-size: 26px; /* Adjusts caption font size */
+  }
+
+  .blog-post-container ol {
+    font-size: 26px /* Adjusts caption font size */
+  }
+
+  #theme-toggle {
+    top: 136px; /* Adjust this value as needed */
+    right: 20px; /* Keep it near the edge */
+  }
+}
