@@ -26,7 +26,7 @@ flex: 1;
 padding: 10px;
 display: flex;
 flex-direction: column;
-height: 30em;
+height: 40em;
 `;
 const TomogachiButtons = styled.div`
 width: 30em;
@@ -78,7 +78,11 @@ const Profile = ({ botType}: { botType: string}) => {
     const currNum = 1
         try {
             const resp = await axios.get(url + "/chatbot/" + currNum + "/information")
-            console.log(resp.data.history);
+          console.log(resp.data.boredom_level);
+          setBoredom(resp.data.boredom_level);
+          setHunger(resp.data.hunger_level);
+          setMood(resp.data.mood_level);
+          setTiredness(resp.data.tiredness_level);
             if (resp.data.history != null) {
                 let msgs = []
                 resp.data.history.map((o) => {
@@ -94,10 +98,74 @@ const Profile = ({ botType}: { botType: string}) => {
         return Promise.resolve([]);
   }
 
+   async function postFeed() { 
+    const url = "http://localhost:5000"
+    const currNum = 1
+        try {
+            const resp = await axios.post(url + "/chatbot/" + currNum + "/feed", {
+                type: botType
+            }, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
+                },
+
+            }
+            )
+          console.log("Fed");
+            await getInfo();
+        } catch (err) {
+            console.log(err);
+        }
+        return Promise.resolve([]);
+   }
+     async function postSleep() { 
+    const url = "http://localhost:5000"
+    const currNum = 1
+        try {
+            const resp = await axios.post(url + "/chatbot/" + currNum + "/sleep", {
+                type: botType
+            }, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
+                },
+
+            }
+            )
+          console.log("Slept");
+            await getInfo();
+        } catch (err) {
+            console.log(err);
+        }
+        return Promise.resolve([]);
+     }
+
+  async function postPlay() { 
+    const url = "http://localhost:5000"
+    const currNum = 1
+        try {
+            const resp = await axios.post(url + "/chatbot/" + currNum + "/play", {
+                type: botType
+            }, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    'Content-Type': 'application/json',
+                },
+
+            }
+            )
+          console.log("Played");
+            await getInfo();
+        } catch (err) {
+            console.log(err);
+        }
+        return Promise.resolve([]);
+  }
   useEffect(
     () => {
       getInfo()
-    }, []
+    }, [boredom, hunger, mood, tiredness]
   )
   return (
     <>
@@ -114,9 +182,9 @@ const Profile = ({ botType}: { botType: string}) => {
               <MenuListItem>Tiredness: {tiredness}</MenuListItem>                                          
             </ProfileImageDiv>              
               <TomogachiButtons>
-                <Button> Feed</Button>
-                <Button> Sleep</Button> 
-                <Button> Play</Button>                               
+                <Button onClick={postFeed}> Feed</Button>
+                <Button onClick={postSleep}> Sleep</Button> 
+                <Button onClick={postPlay}> Play</Button>                               
               </TomogachiButtons>
               </ChatWindowContainer>
           </Window>
