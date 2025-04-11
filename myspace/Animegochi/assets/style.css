@@ -31,7 +31,7 @@ a:hover {
   height: 100px;
   margin: 0 auto;
   padding-top: 0px; /* Change padding to 0 if no Xmas lights, 14px yes there are Xmas lights */
-  background-color: #003399;
+  background-color: #c90079;
   overflow: hidden;
   z-index: 1;
 }
@@ -278,7 +278,7 @@ a:hover {
 .photo-scroll-container {
   height: 640px;
   width: 420px;
-  border: 5px solid #b1d0ef;
+  border: 5px solid #FFCEE6;
   overflow-y: auto;
   overflow-x: hidden;
   margin: 0;
@@ -301,7 +301,7 @@ a:hover {
     width: 820px; /* Total width of the container */
     margin: 0px auto; /* Center the container horizontally */
     gap: 11px; /* Add spacing between the tables */
-    background-color: #ffffff;
+    background-color: #FCBCD7;
 }
 
 .table-wrapper:not(:last-child) {
@@ -310,7 +310,7 @@ a:hover {
 /* FIRST TABLE WRAPPER LEFT */
 .table-wrapper {
     flex: 0 0 346px; /* Fixed width for the first table */
-    background-color: #ffffff;
+    background-color: #FCBCD7;
     margin-bottom: 13px; /* Add space below each table */
     padding-bottom: 10px; /* Optional: Add internal space for better breathing room */
     margin-left: 20px;
@@ -319,7 +319,7 @@ a:hover {
 /* SECOND TABLE WRAPPER RIGHT */
 .table-wrapper-2 {
     flex: 0 0 434px; /* Fixed width for the second table */
-    background-color: #ffffff;
+    background-color: #FCBCD7;
     margin-left: -20px; /* The TRUE GAP between both Table Wrappers!!! */
     margin-bottom: 13px; /* Add space below each table */
     padding-bottom: 0px; /* Optional: Add internal space for better breathing room */
