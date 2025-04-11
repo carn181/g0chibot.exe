@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -68,8 +68,7 @@ flex: 1;
 let chatstarted = false;
 
 const App = () => {
-  const buddies = ['Alice', 'Bob', 'Charlie'];
-
+  const [currBot, setCurrBot] = useState("")
   return (
     <StyleSheetManager shouldForwardProp={shouldForwardProp}>
         <div>
@@ -87,9 +86,9 @@ const App = () => {
 
                     <ContentLayout>
                         {/* Buddy List */}
-                      <BuddyList buddies={buddies}/>
+                          <BuddyList buddies={[]} updateCurrBot={setCurrBot} />
                         {/* Chat Window */}
-                      <ChatWindow botType={""}/>
+                      <ChatWindow botType={currBot}/>
                     </ContentLayout>
                 </AppLayout>
             </ThemeProvider>
