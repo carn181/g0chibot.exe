@@ -4,10 +4,11 @@ html {
 }
 
 body {
-  background-image: url('../images/stars2-BG.gif');
+  background-image: url('../images/emowallpaper.jpg');
   background-color: #000; 
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size:12px;
+  cursor: url('../images/cursor1.png'), auto;
 }
 
 a:link, a:visited {
@@ -170,7 +171,7 @@ a:hover {
 .blue-content-table th {
   width: 101px;
   background-color: #B1D0EF;
-  color: #336699;
+  color: #c761d1;
   vertical-align: top;
   text-align: left;
   font-size: 12px;
