@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Max</title>
+    <link rel="icon" href="images/favicon.png" type="image/gif" sizes="16x16">
+    <style>
+        @font-face {
+            font-family: 'Druk Wide Bold';
+            src: url('fonts/DrukWideBold.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* Background Color */
+            color: #c78530; /* Text Color */
+            font-family: 'Druk Wide Bold', sans-serif;
+            font-size: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            position: relative;
+        }
+
+        p {
+            margin: 0;
+            line-height: 1.2; /* Line spacing */
+        }
+
+        .email-container {
+            max-width: 90%; /* Prevents content from overflowing on small screens */
+            word-wrap: break-word; /* Ensures long text wraps */
+        }
+
+        .email {
+            font-size: 1em; /* Base font size */
+            font-weight: bold; /* Email emphasized */
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .back-button img {
+            width: 40px; /* Adjust size as needed */
+            height: 40px; /* Adjust size as needed */
+            cursor: pointer;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            body {
+                font-size: 24px; /* Reduce base font size for tablets */
+            }
+
+            .back-button img {
+                width: 30px; /* Smaller back button */
+                height: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                font-size: 18px; /* Further reduce font size for mobile phones */
+            }
+
+            .email-container {
+                font-size: 16px; /* Smaller font for emails */
+            }
+
+            .back-button img {
+                width: 25px; /* Smaller back button */
+                height: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="back-button">
+        <img src="images/back-arrow.png" alt="Back">
+    </a>
+    <div class="email-container">
+        <p>BUSINESS CONTACT:</p>
+        <p class="email">HELLO@MAXOLIVO.COM</p>
+    </div>
+
+    <script src="https://tinylytics.app/embed/uNnQEzYz87qYXziAsF6Z.js?kudos" defer></script>
+
+</body>
+</html>

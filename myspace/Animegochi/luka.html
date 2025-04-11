@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luka's Shrine</title>
+  
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+
+  <style>
+    /* Reset styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-image: url("images/cat-bg.jpg");
+    }
+
+    /* Back button styling */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 1000;
+      cursor: pointer;
+      height: 90px;
+    }
+
+    /* Header styling */
+    .header {
+      text-align: center;
+      font-family: 'Bubblegum Sans', cursive; /* Playful and fluffy font */
+      font-size: 96px; /* Slightly larger for emphasis */
+      margin: 30px 0;
+      color: #131313;
+    }
+
+    /* Content container */
+    .content {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Unified section styling */
+    .unified-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #e6f7ff;
+      padding: 50px 0;
+    }
+
+    /* Row styling for alternating layout */
+    .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin: 30px 0;
+      padding: 0 20px; /* Add padding for spacing between text and edges */
+      box-sizing: border-box; /* Ensures padding doesn't affect layout */
+    }
+
+    .row:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+
+    /* Text block styling */
+    .text-block {
+      width: 45%; /* Slightly narrower to prevent crowding */
+      font-size: 32px;
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* Image styling */
+    .image {
+      width: 45%;
+      transform: rotate(calc(var(--rotate) * 1deg));
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 2;
+      box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .image:hover {
+      transform: rotate(calc(var(--rotate) * 1deg)) scale(1.05);
+      animation: jiggle 0.8s infinite;
+      box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Jiggle effect */
+    @keyframes jiggle {
+      0%, 100% {
+        transform: rotate(calc(var(--rotate) * 1deg)) translateX(0);
+      }
+      50% {
+        transform: rotate(calc(var(--rotate) * 1deg)) translateX(5px);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Back Button -->
+  <a href="index.html">
+    <img src="images/cat-back.png" alt="Back" class="back-button" onclick="history.back()">
+  </a>
+
+  <!-- Header -->
+  <div class="header">Luka</div>
+
+  <!-- Unified Section -->
+  <div class="content">
+    <div class="unified-section">
+      <!-- Row 1 -->
+      <div class="row">
+        <img src="images/luka/IMG_5136.JPG" alt="Luka" class="image" style="--rotate: -5;">
+        <div class="text-block">
+          Luka is a ragdolll cat! He made himself right at home the first week we got him.
+        </div>
+      </div>
+
+      <!-- Row 2 -->
+      <div class="row">
+        <img src="images/luka/IMG_5206.JPG" alt="Luka" class="image" style="--rotate: 5;">
+        <div class="text-block">
+          Here he is exploring the fridge!
+        </div>
+      </div>
+
+      <!-- Row 3 -->
+      <div class="row">
+        <img src="images/luka/IMG_8225.JPG" alt="Luka" class="image" style="--rotate: -5;">
+        <div class="text-block">
+          He makes it really impossible to get any work done sometimes...
+        </div>
+      </div>
+
+      <!-- Row 4 -->
+      <div class="row">
+        <img src="images/luka/IMG_5240.JPG" alt="Luka" class="image" style="--rotate: 5;">
+        <div class="text-block">
+          This dude living here like he pays rent
+        </div>
+      </div>
+
+      <!-- Row 5 -->
+      <div class="row">
+        <img src="images/luka/IMG_5395.JPG" alt="Luka" class="image" style="--rotate: -5;">
+        <div class="text-block">
+          "Less worky, more snacky"
+        </div>
+      </div>
+
+      <!-- Row 6 -->
+      <div class="row">
+        <img src="images/luka/IMG_6380.JPG" alt="Luka" class="image" style="--rotate: 5;">
+        <div class="text-block">
+          The evil cato, Darth Luka
+        </div>
+      </div>
+
+      <!-- Row 7 -->
+      <div class="row">
+        <img src="images/luka/IMG_4546.jpg" alt="Luka" class="image" style="--rotate: 5;">
+        <div class="text-block">
+          "ehrmmmm..."
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://tinylytics.app/embed/uNnQEzYz87qYXziAsF6Z.js?kudos" defer></script>
+
+</body>
+</html>
