@@ -42,35 +42,52 @@ margin-right: 10px;
 
 let chatstarted = false;
 
-const ChatWindow = ({ botType, pastMessages=[]  }: { botType: string, pastMessages: any }) => {
-  const [messages, setMessages] = useState(pastMessages
-    //    { text: 'Hey, how are you?', type: 'sent' },
-    
-  );
-  console.log(botType);
-  const [currentMessage, setCurrentMessage] = useState('');
+const ChatWindow = ({ botType, currNum }: { botType: string, currNum: int }) => {
+    const [messages, setMessages] = useState([]
+        //    { text: 'Hey, how are you?', type: 'sent' },
 
-  const num = 1;
-  const url = "http://localhost:5000"
-  async function initBot() {
-    axios.post(url + "/chatbot/" + num + "/initialize", {
-      type: "scenezuki"
-    }, {
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json',
-      },
+    );
+    const [currentMessage, setCurrentMessage] = useState('');
 
+    const num = 1;
+    const url = "http://localhost:5000"
+    async function initBot() {
+        axios.post(url + "/chatbot/" + num + "/initialize", {
+            type: "scenezuki"
+        }, {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                'Content-Type': 'application/json',
+            },
+
+        }
+        )
+            .then(function (response) {
+                console.log(response.data.message);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
-    )
-      .then(function (response) {
-        console.log(response.data.message);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
+    async function getNumMessages() {
+        try {
+          const resp = await axios.get(url + "/chatbot/" + currNum + "/information")
+          console.log(resp.data.history);
+          if (resp.data.history != null) {
+            let msgs=[]
+            resp.data.history.map((o) =>{
+              msgs.push({ "type": "sent", text: o.user });
+              msgs.push({"type": "received", text: o.bot })
+            })
+            console.log(JSON.stringify(msgs));
+            setMessages(msgs);
+          }
+            if (resp.data.available_types != null) { console.log(resp.data.history) };
+        } catch (err) {
+            console.log(err);
+        }
+        return Promise.resolve([]);
+    }
 
   async function sendMsgBot(msg: string): Promise<string> {
     try {
@@ -91,16 +108,22 @@ const ChatWindow = ({ botType, pastMessages=[]  }: { botType: string, pastMessag
 
 
   async function handleSend() {
+    if(messages == null) {
+      await getNumMessages();
+      console.log(messages);
+    }
     if (currentMessage.trim()) {
       setMessages([...messages, { text: currentMessage, type: 'sent' }]);
       var response
       if (!chatstarted) {
         initBot()
         chatstarted = true
+        
       }
       if (chatstarted) {
+        
         response = await sendMsgBot(currentMessage)
-        console.log(response)
+        //        console.log(response)
       }
 
       if (response != null) {

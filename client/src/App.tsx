@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -17,6 +17,8 @@ import ms_sans_serif_bold from 'react95/dist/fonts/ms_sans_serif_bold.woff2';
 
 import BuddyList from './BuddyList'
 import ChatWindow from './ChatWindow'
+
+import axios from "axios"
 
 // This implements the default behavior from styled-components v5
 function shouldForwardProp(propName, target) {
@@ -65,11 +67,11 @@ flex: 1;
 `;
 
 
-let chatstarted = false;
-
 const App = () => {
   const [currBot, setCurrBot] = useState("")
   const [displayChat, setDisplayChat] = useState(false )
+  const [currNum, setCurrNum] = useState(1)
+  
   return (
     <StyleSheetManager shouldForwardProp={shouldForwardProp}>
         <div>
@@ -86,10 +88,10 @@ const App = () => {
 
                     <ContentLayout>
                         {/* Buddy List */}
-                      <BuddyList buddies={[]} updateCurrBot={setCurrBot} setDisplayChat={setDisplayChat}/>
+                          <BuddyList buddies={[]} updateCurrBot={setCurrBot} setDisplayChat={setDisplayChat} setCurrNum={setCurrNum} />
                       {/* Chat Window */}
                       { displayChat ? 
-                        <ChatWindow botType={currBot}/>
+                        <ChatWindow botType={currBot} currNum={currNum} />
                         : null
                       }
                       

@@ -12,6 +12,10 @@ import Draggable from 'react-draggable';
 import { useRef, useState } from 'react';
 import axios from 'axios';
 
+import emogochi_myspace from '../../myspace/Emogochi/index.html';
+import animegochi_myspace from '../../myspace/Animegochi/index.html';
+import gamergochi_myspace from '../../myspace/Gamergochi/index.html'
+
 const BuddyListContainer = styled.div`
 
 `;
@@ -22,7 +26,35 @@ const BuddyList = ({buddies, updateCurrBot, setDisplayChat}) => {
 
   
   let [buddiesList, setBuddiesList ]= useState(null);
+        let myspace;
 
+    function Buddy (buddy, index)  {
+     switch (buddy) {
+         case 'emogochi':
+             myspace = emogochi_myspace;
+             break;
+         case 'gamergochi':
+             myspace = gamergochi_myspace;
+             break;
+         case 'animegochi':
+             myspace = animegochi_myspace
+             break;
+         default:
+             myspace = animegochi_myspace
+             break;
+     }    
+    return (
+        <>
+            <MenuListItem key={index}
+                style={{ flex: 1, margin: "5px", gap: "50px" }}
+            >
+                <div>{buddy}</div>
+                <a href={myspace}><Button>MySpace !</Button ></a>
+                <Button onClick={(e) => { setDisplayChat(true); updateCurrBot(buddy) }}>Chat</Button>
+            </MenuListItem>
+        </>
+    )
+}
   React.useEffect(() => {
     async function getBotTypes(): Promise<any>{
       try {
@@ -38,7 +70,7 @@ const BuddyList = ({buddies, updateCurrBot, setDisplayChat}) => {
     getBotTypes();
     console.log(buddiesList)
   }, [])
-  
+
   return (<>
       <Draggable nodeRef={nodeRef}>
           <BuddyListContainer ref={nodeRef}>
@@ -46,14 +78,8 @@ const BuddyList = ({buddies, updateCurrBot, setDisplayChat}) => {
                   <WindowHeader>g0chib0t.exe</WindowHeader>
                   <WindowContent>
                     <MenuList>
-                      {buddiesList != null ? buddiesList.map((buddy, index) => (
-                        <MenuListItem key={index}
-                          style={{ flex: 1,  margin: "5px", gap: "50px" }}
-                          >
-                          <div>{buddy}</div>
-                          <a href="https://google.com">MySpace ! </a>
-                          <Button onClick={(e) => { setDisplayChat(true);updateCurrBot(e.target.textContent) }}>Chat</Button>
-                        </MenuListItem>
+          {buddiesList != null ? buddiesList.map((buddy, index) => (
+              Buddy(buddy, index)
                       )) : null}
                     </MenuList>
                   </WindowContent>
