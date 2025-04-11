@@ -3,7 +3,7 @@ from flask_cors import CORS, cross_origin
 import ai  # for chatbot class
 
 app = Flask(__name__)
-cors=CORS(app)
+cors = CORS(app)
 
 # dictionary to keep track of each chatbot by ID number
 chat_sessions = {}
@@ -14,20 +14,23 @@ chat_sessions = {}
 def initialize_chat(num):
     #  get data from frontend (name and personaility)
     data = request.get_json()
-    name = data.get("name", f"Bot{num}")  # the default name if no name is given
-    instr = data.get("instruction", "Default instruction.")  # placeholder/default instruction
+    bot_type = data.get("type", "scenezuki")  # default to 'scenezuki' if no type is provided
 
-    # makes a new chatbot using provided name and instruction
-    bot = ai.chatbot1
+    # makes a new chatbot using provided type from ai.chatbot_types
+    if bot_type not in ai.chatbot_types:
+        return jsonify({"error": f"Invalid chatbot type '{bot_type}'"}), 400
+
+    bot = ai.chatbot_types[bot_type]()
     bot.init()  # sets up gemini chat session
 
     # saves chatbot and its message history in this session dictionary
     chat_sessions[num] = {
         "bot": bot,
+        "type": bot_type,
         "history": []  # store the user/bot message pairs here
     }
 
-    return jsonify({"message": f"Chatbot {num} ('{name}') initialized."})
+    return jsonify({"message": f"Chatbot {num} ('{bot.name}' of type '{bot_type}') initialized."})
 
 # route to send a message to the chatbot and get its reply
 @app.route('/chatbot/<int:num>/sendmsg', methods=['POST'])
@@ -83,10 +86,14 @@ def list_all_chatbots():
         result.append({
             "chatbot_id": num,
             "chatbot_name": bot.name,
+            "chatbot_type": session.get("type", "unknown"),
             "instruction_snippet": bot.instr[:100] + "...",
             "message_count": len(session["history"])
         })
-    return jsonify(result)
+    return jsonify({
+        "active_bots": result,
+        "available_types": list(ai.chatbot_types.keys())
+    })
 
 # Starts the Flask app in debug mode (so you see errors printed)
 if __name__ == '__main__':
