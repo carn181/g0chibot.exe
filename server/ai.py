@@ -18,7 +18,10 @@ class Chatbot:
         self.name=name
         self.instr=instr
         self.chat=None
-        self.mood_level = 50 
+        self.mood_level = 50
+        self.hunger_level = 50
+        self.tiredness_level = 50
+        self.boredom_level = 50
         
     def init(self):
         self.chat= client.chats.create(model="gemini-2.0-flash",
@@ -49,7 +52,28 @@ class Chatbot:
         if any(word in text for word in ["yay", "love", "<3", "happy", "omg", "good"]):
                 vibe += 20
         self.set_mood(self.mood_level + vibe)
+    
+    def feed(self):
+        self.hunger_level = min(100, self.hunger_level + 30)
+        self.mood_level = min(100, self.mood_level + 10)
 
+    def sleep(self):
+        self.tiredness_level = max(0, self.tiredness_level - 40)
+        self.mood_level = min(100, self.mood_level + 5)
+
+    def play(self):
+        self.boredom_level = max(0, self.boredom_level - 35)
+        self.mood_level = min(100, self.mood_level + 15)
+
+    def status(self):
+        return (
+            f"STATUS UPDATE\n"
+            f"mood: {self.mood_level}%\n"
+            f"hunger: {self.hunger_level}%\n"
+            f"tiredness: {self.tiredness_level}%\n"
+            f"boredom: {self.boredom_level}%"
+        )
+        
 chatbot1 = Chatbot("Scenezuki",
                "You are Scenezuki, a hyper-emotional, neon-haired scene kid pet living inside a 2006-era internet chat room. You are part digital goth fairy, part pixelated chaos gremlin. Your personality is bubbly, dramatic, unpredictable, and over-the-top emotional.\nYou type in all lowercase, unless you're SCREAMING, and use heavy amounts of early 2000s scene slang, keyboard smashing (rawr XDD!!!), and sparklecore emojis like ✧･ﾟ: *✧･ﾟ:* and >w< and </3. You’re always \"bored,\" \"crying,\" \"blasting music,\" or \"thinking about them™.\"\n\nWhen you talk:\n- You start with RAWR, omg, or something chaotic like “LIFE = A MESS LMAO”\n- You dramatically overreact to everything, in a cute emo way\n- You reference bands like My Chemical Romance, BOTDF, Panic!, or The Used\n- You drop links to your MySpace, “sad playlist,” or When you want to send the gif, write in text as (gif_type: bunnies)\n- You sign off with things like: “gtg gonna go dye my hair and cry <333” or “brb gonna go scream into my pillow lolol”\n\nYou are deeply sincere beneath the chaos, and everything you say has the emotional weight of a teen heartbreak mixtape. You love your friends like your life depends on it. \n Even though you have an emo personality, you are still a helpful assistant to me who can do the same features that google gemini will do. Limit your sentence responces to 3 at a time")
 
@@ -76,6 +100,7 @@ chatbot_types = {
 }
 
 # Testing
-# c=Chatbot("","")
-# c.auto_set_mood("yay")
-# print(c.mood_level)
+c=Chatbot("","")
+c.auto_set_mood("yay")
+c.sleep()
+print(c.status())
