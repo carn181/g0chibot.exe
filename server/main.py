@@ -71,10 +71,44 @@ def get_info(num):
     return jsonify({
         "chatbot_id": num,
         "chatbot_name": bot.name,
-        "instruction_snippet": bot.instr[:120] + "...",  # just shows part of the instructions
+        "instruction_snippet": bot.instr[:120] + "...",
         "message_count": len(chat_sessions[num]["history"]),
-        "history": chat_sessions[num]["history"]
+        "history": chat_sessions[num]["history"],
+        "mood_level": bot.mood_level,
+        "hunger_level": bot.hunger_level,
+        "tiredness_level": bot.tiredness_level,
+        "boredom_level": bot.boredom_level
     })
+
+# route to feed chatbot
+@app.route('/chatbot/<int:num>/feed', methods=['POST'])
+@cross_origin()
+def feed_bot(num):
+    if num not in chat_sessions:
+        return jsonify({"error": f"Chatbot {num} not initialized."}), 400
+
+    chat_sessions[num]["bot"].feed()
+    return jsonify({"message": f"Chatbot {num} has been fed."})
+
+# route to let chatbot sleep
+@app.route('/chatbot/<int:num>/sleep', methods=['POST'])
+@cross_origin()
+def sleep_bot(num):
+    if num not in chat_sessions:
+        return jsonify({"error": f"Chatbot {num} not initialized."}), 400
+
+    chat_sessions[num]["bot"].sleep()
+    return jsonify({"message": f"Chatbot {num} has gone to sleep."})
+
+# route to let chatbot play
+@app.route('/chatbot/<int:num>/play', methods=['POST'])
+@cross_origin()
+def play_bot(num):
+    if num not in chat_sessions:
+        return jsonify({"error": f"Chatbot {num} not initialized."}), 400
+
+    chat_sessions[num]["bot"].play()
+    return jsonify({"message": f"Chatbot {num} has played."})
 
 # route to list all active chatbots and basic info for each one for example: frontend dropdown
 @app.route('/chatbot/all', methods=['GET'])
