@@ -1,61 +1,87 @@
 from flask import Flask, request, jsonify
-from google import genai
-from google.genai import types
-import os
-import ai
+import ai  # for chatbot class
 
 app = Flask(__name__)
 
-
-# Session store for multiple chatbots
+# dictionary to keep track of each chatbot by ID number
 chat_sessions = {}
 
-# config to tell the ai chatbot 
-system_instruction = (
-    "For any of the following messages, speak like an 18 year old l33t hacker boy on the 2000's internet. "
-    "I will communicate with you like I'm on MySpace and you should respond like then. "
-    "You should give me a fun fact of the 2000's internet as well when I ask. "
-    "Never give huge paragraphs, and give new sentences on new lines."
-)
+# path/route to create new chatbot
 @app.route('/chatbot/<int:num>/initialize', methods=['POST'])
 def initialize_chat(num):
-    # Create Gemini chat with style
-    chat_sessions[num] = {
-        "chat": [],
-        "history": []
-    }
-    ai.chatbot1.init()
-    return jsonify({"message": f"Chatbot {num} initialized."})
+    #  get data from frontend (name and personaility)
+    data = request.get_json()
+    name = data.get("name", f"Bot{num}")  # the default name if no name is given
+    instr = data.get("instruction", "Default instruction.")  # placeholder/default instruction
 
+    # makes a new chatbot using provided name and instruction
+    bot = ai.Chatbot(name=name, instr=instr)
+    bot.init()  # sets up gemini chat session
+
+    # saves chatbot and its message history in this session dictionary
+    chat_sessions[num] = {
+        "bot": bot,
+        "history": []  # store the user/bot message pairs here
+    }
+
+    return jsonify({"message": f"Chatbot {num} ('{name}') initialized."})
+
+# route to send a message to the chatbot and get its reply
 @app.route('/chatbot/<int:num>/sendmsg', methods=['POST'])
 def send_message(num):
+    # check if the chatbot with that ID exists
     if num not in chat_sessions:
         return jsonify({"error": f"Chatbot {num} not initialized."}), 400
 
+    # gets the user's msg from the frontend request
     user_msg = request.json.get('message', '')
     if not user_msg:
         return jsonify({"error": "No message provided."}), 400
 
-    chat = chat_sessions[num]["chat"]
+    bot = chat_sessions[num]["bot"]  # get the chatbot instance #
 
     try:
-        response = ai.chatbot1.send_msg(user_msg)
-        bot_reply = response
+        # send the user's msg to the bot and get its reply
+        bot_reply = bot.send_msg(user_msg)
+
+        # adds the pair(user's question, bot's reply) to the history
         chat_sessions[num]["history"].append({"user": user_msg, "bot": bot_reply})
+
+        # returns the bot's reply to the frontend
         return jsonify({"response": bot_reply})
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# route for info about a specific chatbot like name, msg count, and chat history
 @app.route('/chatbot/<int:num>/information', methods=['GET'])
 def get_info(num):
     if num not in chat_sessions:
         return jsonify({"error": f"Chatbot {num} not initialized."}), 400
 
+    bot = chat_sessions[num]["bot"]
+
     return jsonify({
         "chatbot_id": num,
+        "chatbot_name": bot.name,
+        "instruction_snippet": bot.instr[:120] + "...",  # just shows part of the instructions
         "message_count": len(chat_sessions[num]["history"]),
         "history": chat_sessions[num]["history"]
     })
 
+# route to list all active chatbots and basic info for each one for example: frontend dropdown
+@app.route('/chatbot/all', methods=['GET'])
+def list_all_chatbots():
+    result = []
+    for num, session in chat_sessions.items():
+        bot = session["bot"]
+        result.append({
+            "chatbot_id": num,
+            "chatbot_name": bot.name,
+            "instruction_snippet": bot.instr[:100] + "...",
+            "message_count": len(session["history"])
+        })
+    return jsonify(result)
+
+# Starts the Flask app in debug mode (so you see errors printed)
 if __name__ == '__main__':
     app.run(debug=True)
