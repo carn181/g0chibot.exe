@@ -1,13 +1,16 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS, cross_origin
 import ai  # for chatbot class
 
 app = Flask(__name__)
+cors=CORS(app)
 
 # dictionary to keep track of each chatbot by ID number
 chat_sessions = {}
 
 # path/route to create new chatbot
 @app.route('/chatbot/<int:num>/initialize', methods=['POST'])
+@cross_origin()
 def initialize_chat(num):
     #  get data from frontend (name and personaility)
     data = request.get_json()
@@ -15,7 +18,7 @@ def initialize_chat(num):
     instr = data.get("instruction", "Default instruction.")  # placeholder/default instruction
 
     # makes a new chatbot using provided name and instruction
-    bot = ai.Chatbot(name=name, instr=instr)
+    bot = ai.chatbot1
     bot.init()  # sets up gemini chat session
 
     # saves chatbot and its message history in this session dictionary
@@ -28,6 +31,7 @@ def initialize_chat(num):
 
 # route to send a message to the chatbot and get its reply
 @app.route('/chatbot/<int:num>/sendmsg', methods=['POST'])
+@cross_origin()
 def send_message(num):
     # check if the chatbot with that ID exists
     if num not in chat_sessions:
@@ -54,6 +58,7 @@ def send_message(num):
 
 # route for info about a specific chatbot like name, msg count, and chat history
 @app.route('/chatbot/<int:num>/information', methods=['GET'])
+@cross_origin()
 def get_info(num):
     if num not in chat_sessions:
         return jsonify({"error": f"Chatbot {num} not initialized."}), 400
@@ -70,6 +75,7 @@ def get_info(num):
 
 # route to list all active chatbots and basic info for each one for example: frontend dropdown
 @app.route('/chatbot/all', methods=['GET'])
+@cross_origin()
 def list_all_chatbots():
     result = []
     for num, session in chat_sessions.items():
