@@ -17,17 +17,18 @@ import ms_sans_serif_bold from 'react95/dist/fonts/ms_sans_serif_bold.woff2';
 
 import BuddyList from './BuddyList'
 import ChatWindow from './ChatWindow'
+import Profile from './Profile'
 
 import axios from "axios"
 
 // This implements the default behavior from styled-components v5
 function shouldForwardProp(propName, target) {
-    if (typeof target === "string") {
-        // For HTML elements, forward the prop if it is a valid HTML attribute
-        return isPropValid(propName);
-    }
-    // For other elements, forward all props
-    return true;
+  if (typeof target === "string") {
+    // For HTML elements, forward the prop if it is a valid HTML attribute
+    return isPropValid(propName);
+  }
+  // For other elements, forward all props
+  return true;
 }
 
 
@@ -35,19 +36,19 @@ function shouldForwardProp(propName, target) {
 const GlobalStyles = createGlobalStyle`
   ${styleReset}
   @font-face {
-    font-family: 'ms_sans_serif';
-    src: url('${ms_sans_serif}') format('woff2');
-    font-weight: 400;
-    font-style: normal
+  font-family: 'ms_sans_serif';
+  src: url('${ms_sans_serif}') format('woff2');
+  font-weight: 400;
+  font-style: normal
   }
   @font-face {
-    font-family: 'ms_sans_serif';
-    src: url('${ms_sans_serif_bold}') format('woff2');
-    font-weight: bold;
-    font-style: normal
+  font-family: 'ms_sans_serif';
+  src: url('${ms_sans_serif_bold}') format('woff2');
+  font-weight: bold;
+  font-style: normal
   }
   body, input, select, textarea {
-    font-family: 'ms_sans_serif';
+  font-family: 'ms_sans_serif';
   }
 `;
 
@@ -70,30 +71,40 @@ flex: 1;
 const App = () => {
   const [currBot, setCurrBot] = useState("")
   const [displayChat, setDisplayChat] = useState(false )
+  const [displayProfile, setDisplayProfile] = useState(false)
   const [currNum, setCurrNum] = useState(1)
-  
+  const [chatstarted, setchatstarted] = useState(false);
+  function openBot () {
+    setDisplayChat(true)
+    setDisplayProfile(true)
+    setchatstarted(false);
+  }
   return (
     <StyleSheetManager shouldForwardProp={shouldForwardProp}>
-        <div>
-            <GlobalStyles />
-            <ThemeProvider theme={original}>
-                <AppLayout>
-                    {/* Header Bar */}
-                    <AppBar>
-                        <Toolbar>
-                            <Button variant="menu">Start</Button>
+      <div>
+        <GlobalStyles />
+        <ThemeProvider theme={original}>
+          <AppLayout>
+            {/* Header Bar */}
+            <AppBar>
+              <Toolbar>
+                <Button variant="menu">Start</Button>
                            
-                        </Toolbar>
-                    </AppBar>
+              </Toolbar>
+            </AppBar>
 
-                    <ContentLayout>
-                        {/* Buddy List */}
-                          <BuddyList buddies={[]} updateCurrBot={setCurrBot} setDisplayChat={setDisplayChat} setCurrNum={setCurrNum} />
-                      {/* Chat Window */}
-                      { displayChat ? 
-                        <ChatWindow botType={currBot} currNum={currNum} />
-                        : null
-                      }
+            <ContentLayout>
+              {/* Buddy List */}
+              <BuddyList buddies={[]} updateCurrBot={setCurrBot} setOpenBot={openBot} setCurrNum={setCurrNum} />
+              {/* Chat Window */}
+              { displayChat ? 
+                              <ChatWindow key={currBot} botType={currBot} currNum={currNum} prevMessages={[]} chatstarted={chatstarted} setChatStarted={setchatstarted} />
+                : null
+              }
+              {/*Profile Window*/}
+              { displayProfile ?
+                <Profile botType={currBot} />
+                : null}
                       
                     </ContentLayout>
 

@@ -40,10 +40,8 @@ margin-right: 10px;
 `;
 
 
-let chatstarted = false;
-
-const ChatWindow = ({ botType, currNum }: { botType: string, currNum: int }) => {
-    const [messages, setMessages] = useState([]
+const ChatWindow = ({ botType, currNum, prevMessages = [], chatstarted = false, setChatStarted }: { botType: string, currNum: int, messages: Array<string>, setChatStarted: () => any }) => {
+    const [messages, setMessages] = useState(prevMessages
         //    { text: 'Hey, how are you?', type: 'sent' },
 
     );
@@ -53,7 +51,7 @@ const ChatWindow = ({ botType, currNum }: { botType: string, currNum: int }) => 
     const url = "http://localhost:5000"
     async function initBot() {
         axios.post(url + "/chatbot/" + num + "/initialize", {
-            type: "scenezuki"
+            type: botType
         }, {
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -118,7 +116,7 @@ const ChatWindow = ({ botType, currNum }: { botType: string, currNum: int }) => 
       if (!chatstarted) {
         initBot()
         chatstarted = true
-        
+        setChatStarted(true);
       }
       if (chatstarted) {
         

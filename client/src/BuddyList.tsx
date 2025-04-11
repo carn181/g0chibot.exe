@@ -20,7 +20,7 @@ const BuddyListContainer = styled.div`
 
 `;
 
-const BuddyList = ({buddies, updateCurrBot, setDisplayChat}) => {
+const BuddyList = ({buddies, updateCurrBot, setOpenBot}) => {
   const nodeRef = useRef(null);
   const url = "http://localhost:5000"
 
@@ -50,7 +50,7 @@ const BuddyList = ({buddies, updateCurrBot, setDisplayChat}) => {
             >
                 <div>{buddy}</div>
                 <a href={myspace}><Button>MySpace !</Button ></a>
-                <Button onClick={(e) => { setDisplayChat(true); updateCurrBot(buddy) }}>Chat</Button>
+            <Button onClick={(e) => { setOpenBot(); updateCurrBot(buddy) }}>Chat</Button>
             </MenuListItem>
         </>
     )
