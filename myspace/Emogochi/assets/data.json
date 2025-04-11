@@ -1,0 +1,42 @@
+{
+    "profile": {
+      "name": "Max",
+      "profilePicture": "assets/img/profile.jpg",
+      "slogan": "Living life on shuffle",
+      "gender": {
+        "label": "Male",
+        "icon": "assets/icons/male.png"
+      },
+      "age": 25,
+      "location": "San Francisco, CA",
+      "onlineStatus": "assets/img/online.png",
+      "mood": {
+        "status": "Happy",
+        "icon": "assets/icons/happy.png"
+      },
+      "links": [
+        { "url": "https://example.com/gallery", "text": "Gallery" },
+        { "url": "https://example.com/blog", "text": "Blog" }
+      ]
+    },
+    "contact": {
+      "socials": [
+        {
+          "name": "Twitter",
+          "url": "https://twitter.com/example",
+          "icon": "assets/icons/twitter.png"
+        },
+        {
+          "name": "Instagram",
+          "url": "https://instagram.com/example",
+          "icon": "assets/icons/instagram.png"
+        }
+      ]
+    },
+    "audioPlayer": {
+      "title": "Chill Vibes",
+      "artist": "Lo-Fi Collective",
+      "audioFile": "assets/audio/chill.mp3"
+    }
+  }
+  

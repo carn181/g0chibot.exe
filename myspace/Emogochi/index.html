@@ -24,6 +24,28 @@
    </head>
 
    <body>
+
+
+<!-- Add this section inside the body to autoplay audio -->
+<audio id="myAudio" autoplay loop>
+   <source src="audio/crawling.mp3" type="audio/mp3">
+   Your browser does not support the audio element.
+</audio>
+
+<script>
+   const audio = document.getElementById('myAudio');
+
+   // Set the starting point in seconds (e.g., 30 seconds)
+   audio.currentTime = 22;
+
+   // Wait for the audio to load before playing (just in case it doesn't start immediately)
+   audio.oncanplaythrough = function() {
+      audio.play(); // Play the audio after it’s ready
+   };
+</script>
+
+
+
       <!-- HEADER SECTION -->
       <div class="header">
          <!-- HEADER CONTENT -->
@@ -31,8 +53,8 @@
             <a href="index.html" class="logo-link">
                <img src="images/maxspace.png" height="96px" alt="Maxspace" draggable="false">
            </a>
-            <a href="https://www.youtube.com/maxolivo" class="youtube-link">
-               <img src="images/youtube-banner.gif" alt="YouTube Banner" draggable="false" class="youtube-banner">
+          
+            
             </a>
          </div>
 
@@ -50,33 +72,34 @@
 
                   <br>
 
-                  <!-- MAX'S INTERESTS -->
+                  <!-- INTERESTS -->
                   <section class="blue-section-wrapper">
                      <div class="blue-table-container">
-                        <div class="blue-header">&nbsp;&nbsp;Max's Interests</div>
+                        <div class="blue-header">&nbsp;&nbsp;Scenegochi's Interests</div>
                         <table class="blue-content-table">
                            <tr>
-                              <th>General</th>
-                              <td>Making Videos, Metal Detecting, Trying New Hobbies, Vinyl Records, Basketball, Concerts, Camping (as an idea)</td>
+                              <th>Hobbies</th>
+                              <td>Listening to music1!1!!1 Trying new fashion and hair styles. Playing my guitar! </td>
                            </tr>
                            <tr>
+
                               <th>Music</th>
                               <td>
-                                 Radiohead, Tokyo Police Club, Phoenix, Blink-182, Phil Collins, Coldplay, LilyPichu, Grupo Frontera, Zoe, Tricot, Fleetwood Mac, Neil Young, Lady A, Darius Rucker, Nujabes, Paramore, Anderson .Paak, Lorde, RADWIMPS, Arcade Fire
-                                 <b><a href="music.html">Current favorite music!</a></b>
+                                 Radiohead, My Chemical Romance, Mayday Parade, Blood on the Dance Floor, Bring Me The Horizon, Linkin Park, Basement Jaxx, Pierce the Veil,
+                                 Sleeping With Sirens 
                               </td>
                            </tr>
                            <tr>
                               <th>Movies</th>
-                              <td>The Social Network, The Lion King (1994), La-La Land, Parasite, The Blair Witch Project, Cloverfield, Get Out, Back to the Future, Spider-Man (2002), Memento, Jurassic Park, Your Name, Spirited Away, Her, Toy Story, 5 Centimeters Per Second</td>
+                              <td>Twilight, Shrek, Twilight, Coraline, The Dark Knight,  </td>
                            </tr>
                            <tr>
                               <th>Television</th>
-                              <td>Dallas Mavs, Avatar: The Last Airbender, Teen Titans, Firefly, South Park, The Rehearsal, Black Mirror, Breaking Bad, Better Call Saul, Dune: Prophecy, The Owl House</td>
+                              <td>Teen Titans, ICarly, Skins, American Dragon: Jake Long, Danny Phantom, Kids Next Door, Code Lyoko </td>
                            </tr>
                            <tr>
                               <th>Games</th>
-                              <td>Animal Crossing, Super Mario World, Breath of the Wild, Metal Gear Solid 2 and 3, Portal 2, Wilmot's Warehouse, Counter-Strike, World of Warcraft, Minecraft, Mario Party, Chess, Geoguessr</td>
+                              <td>Minecraft, GUITAR HERO!!!, Roblox, Club Penguin,</td>
                            </tr>
                            <tr>
                               <th>Books</th>
@@ -88,10 +111,10 @@
 
                   <br>
 
-                  <!-- MAX'S DETAILS -->
+                  <!-- DETAILS -->
                   <section class="blue-section-wrapper">
                      <div class="blue-table-container">
-                        <div class="blue-header">&nbsp;&nbsp;Max's Details</div>
+                        <div class="blue-header">&nbsp;&nbsp;Scenegochi's Details</div>
                         <table class="blue-content-table">
                            <tr>
                               <th>Status:</th>
@@ -173,7 +196,7 @@
 
             <!--MAX'S BLURBS ORANGE BAR-->		   						
             <div class="orange-bar">
-               <span class="orange-bar-text">Max's Blurbs</span>
+               <span class="orange-bar-text">Scenegochi's Blurbs</span>
             </div>
 
             <!-- ABOUT ME -->
@@ -181,7 +204,28 @@
                <span class="orange-body-title">About me:</span>
                <br>
                <span class="orange-body-content">
-                  I'm Max. I'm just a simple dude with an ordinary mind. I hid a couple of fun secrets around this site, have fun exploring!
+                  hey... i’m Scenegochi (my friends call me Sceney)
+                  i like emo music, neon eyeliner, and ppl who actually get it TT
+                  my guitar is my best friend rn and twilight is literally my whole personality 💔
+                  yes, i watch shrek unironically and no i won’t apologize for it (shrek 2 is cinema.)
+                  if you don’t love raven from teen titans we can’t talk tbh.
+
+                  i spend most of my time:
+                  🎧 listening to songs that make me cry
+                  🎸 trying to write lyrics i’ll never show anyone
+                  💅 bleaching my hair in the bathroom at 3am
+                  💻 playing minecraft + crying in club penguin igloos
+
+                  ✿ fave shows ✿
+                  teen titans, skins (effy = me fr), code lyoko, danny phantom, american dragon, icarly (don’t @ me)
+
+                  ✿ games ✿
+                  minecraft (i live in a cave), guitar hero (i slay), roblox (chaotic), club penguin (rip...)
+
+                  don’t message me if ur gonna be dry or fake
+                  i’m tired lol. just be real.
+                  xoxo,
+                  — xXforsaken.glitterXx ✨</3
                   <img src="images/peepoHappy.png" height="14px" alt="Peepo Happy">
                </span>
             </div>
@@ -197,7 +241,7 @@
 
             <!-- MAX'S FRIEND SPACE ORANGE BAR-->					
             <div class="orange-bar">
-               <span class="orange-bar-text">Max's Friend Space</span>
+               <span class="orange-bar-text">Scenegochi's Friend Space</span>
             </div>
 
             <!-- FRIENDS LIST-->		  
@@ -229,11 +273,11 @@
                   </div>
                </div>
                <div class="view-all">
-                  <a href="friends.html" class="view-all-link">View All of Max's Friends</a>
+                 
                </div>
             </div>
 
-            <!--THINGS MAX LIKES-->
+            <!--THINGS SCENEGOCHI LIKES-->
             <table style="border-collapse: collapse; width: 434px; margin: 0 auto; border: none; table-layout: fixed; margin-bottom: 10px;">
                <tr>
                    <td style="text-align: center;"><img src="images/random/cat%20left.gif" height="30px"></td>
@@ -251,9 +295,9 @@
 
             <!-- SCROLL IMAGES -->	
             <div class="photo-scroll-container">
-               <img src="images/scroll/cats-are-great.gif">
-               <img src="images/scroll/he-was-a-good-boy.gif">
-               <img src="images/scroll/otv-camping.gif">
+               <img src="images/scroll/girgif.gif">
+               <img src="images/scroll/mcrcover.jpeg">
+               <img src="images/scroll/hugs.jpg">
                <img src="images/scroll/pumpkins.gif">
                <img src="images/scroll/biking-in-kyoto-2022.gif">
                <img src="images/scroll/i-was-there.gif">
