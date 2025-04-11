@@ -69,6 +69,7 @@ let chatstarted = false;
 
 const App = () => {
   const [currBot, setCurrBot] = useState("")
+  const [displayChat, setDisplayChat] = useState(false )
   return (
     <StyleSheetManager shouldForwardProp={shouldForwardProp}>
         <div>
@@ -78,18 +79,23 @@ const App = () => {
                     {/* Header Bar */}
                     <AppBar>
                         <Toolbar>
-                            <Button variant="menu">File</Button>
-                            <Button variant="menu">Edit</Button>
-                            <Button variant="menu">Help</Button>
+                            <Button variant="menu">Start</Button>
+                           
                         </Toolbar>
                     </AppBar>
 
                     <ContentLayout>
                         {/* Buddy List */}
-                          <BuddyList buddies={[]} updateCurrBot={setCurrBot} />
-                        {/* Chat Window */}
-                      <ChatWindow botType={currBot}/>
+                      <BuddyList buddies={[]} updateCurrBot={setCurrBot} setDisplayChat={setDisplayChat}/>
+                      {/* Chat Window */}
+                      { displayChat ? 
+                        <ChatWindow botType={currBot}/>
+                        : null
+                      }
+                      
                     </ContentLayout>
+
+                  
                 </AppLayout>
             </ThemeProvider>
         </div>

@@ -5,6 +5,7 @@ import {
   WindowContent,
   MenuList,
   MenuListItem,
+  Button,
 } from 'react95';
 import { styled } from 'styled-components';
 import Draggable from 'react-draggable';
@@ -12,12 +13,10 @@ import { useRef, useState } from 'react';
 import axios from 'axios';
 
 const BuddyListContainer = styled.div`
-width: 250px;
-overflow-y: auto;
 
 `;
 
-const BuddyList = ({buddies, updateCurrBot}) => {
+const BuddyList = ({buddies, updateCurrBot, setDisplayChat}) => {
   const nodeRef = useRef(null);
   const url = "http://localhost:5000"
 
@@ -29,7 +28,8 @@ const BuddyList = ({buddies, updateCurrBot}) => {
       try {
         const resp = await axios.get(url + "/chatbot/all")
         setBuddiesList(resp.data.available_types)
-        if (resp.data.available_types != null) { updateCurrBot(resp.data.available_types[0]) };
+        if (resp.data.available_types != null) { updateCurrBot(resp.data.available_types[0]); };
+
       } catch (err) {
           console.log(err);
       }
@@ -42,12 +42,18 @@ const BuddyList = ({buddies, updateCurrBot}) => {
   return (<>
       <Draggable nodeRef={nodeRef}>
           <BuddyListContainer ref={nodeRef}>
-                <Window style={{ margin: '0px' }}>
+            <Window style={{ margin: '5px', }}>
                   <WindowHeader>g0chib0t.exe</WindowHeader>
                   <WindowContent>
                     <MenuList>
                       {buddiesList != null ? buddiesList.map((buddy, index) => (
-                        <MenuListItem key={index} onClick={(e) => { updateCurrBot(e.target.textContent) }}>{buddy}</MenuListItem>
+                        <MenuListItem key={index}
+                          style={{ flex: 1,  margin: "5px", gap: "50px" }}
+                          >
+                          <div>{buddy}</div>
+                          <a href="https://google.com">MySpace ! </a>
+                          <Button onClick={(e) => { setDisplayChat(true);updateCurrBot(e.target.textContent) }}>Chat</Button>
+                        </MenuListItem>
                       )) : null}
                     </MenuList>
                   </WindowContent>

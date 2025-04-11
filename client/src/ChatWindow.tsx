@@ -4,6 +4,7 @@ import {
   WindowHeader,
   WindowContent,
   TextInput,
+  ScrollView,
 } from 'react95';
 import { useState, useRef } from 'react';
 import Draggable from 'react-draggable';
@@ -41,10 +42,11 @@ margin-right: 10px;
 
 let chatstarted = false;
 
-const ChatWindow = ({ botType, updateCurrBot }: { botType: string, updateCurrBot: any }) => {
-  const [messages, setMessages] = useState([
+const ChatWindow = ({ botType, pastMessages=[]  }: { botType: string, pastMessages: any }) => {
+  const [messages, setMessages] = useState(pastMessages
     //    { text: 'Hey, how are you?', type: 'sent' },
-  ]);
+    
+  );
   console.log(botType);
   const [currentMessage, setCurrentMessage] = useState('');
 
@@ -113,12 +115,13 @@ const ChatWindow = ({ botType, updateCurrBot }: { botType: string, updateCurrBot
       <Draggable nodeRef={nodeRef}>
         <ChatWindowContainer ref={nodeRef}>
           <Window style={{ flex: 1, marginBottom: '10px', width: '800px', height: '100%'}}>
-            <WindowHeader>Chat with Scenezuki</WindowHeader>
+                      <WindowHeader>Chat with {botType}</WindowHeader>
             <WindowContent style={
               { flex: 1,
                 overflowY: 'auto',
                 height: '80%',
                 backgroundColor: 'white'}}>
+              <ScrollView>
               {/*
               OLD STYLE 
               {messages.map((message: {type: string, text: string}, index) => (
@@ -172,6 +175,7 @@ const ChatWindow = ({ botType, updateCurrBot }: { botType: string, updateCurrBot
                   </div>
                 </div>
               ))}
+              </ScrollView>
             </WindowContent>
             <MessageInputContainer>
               <MessageInputField
