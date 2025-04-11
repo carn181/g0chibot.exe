@@ -1,13 +1,34 @@
 import React from 'react';
-import { MenuList, MenuListItem, Separator, styleReset } from 'react95';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
-
+import {
+  AppBar,
+  Toolbar,
+  Button,
+  styleReset,
+} from 'react95';
+import { createGlobalStyle, ThemeProvider, styled } from 'styled-components';
+import { StyleSheetManager } from 'styled-components';
+import isPropValid from '@emotion/is-prop-valid';
 /* Pick a theme of your choice */
 import original from 'react95/dist/themes/original';
 
 /* Original Windows95 font (optional) */
 import ms_sans_serif from 'react95/dist/fonts/ms_sans_serif.woff2';
 import ms_sans_serif_bold from 'react95/dist/fonts/ms_sans_serif_bold.woff2';
+
+import BuddyList from './BuddyList'
+import ChatWindow from './ChatWindow'
+
+// This implements the default behavior from styled-components v5
+function shouldForwardProp(propName, target) {
+    if (typeof target === "string") {
+        // For HTML elements, forward the prop if it is a valid HTML attribute
+        return isPropValid(propName);
+    }
+    // For other elements, forward all props
+    return true;
+}
+
+
 
 const GlobalStyles = createGlobalStyle`
   ${styleReset}
@@ -28,18 +49,54 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-const App = () => (
-  <div>
-    <GlobalStyles />
-    <ThemeProvider theme={original}>
-      <MenuList>
-        <MenuListItem>🎤 Sing</MenuListItem>
-        <MenuListItem>💃🏻 Dance</MenuListItem>
-        <Separator />
-        <MenuListItem disabled>😴 Sleep</MenuListItem>
-      </MenuList>
-    </ThemeProvider>
-  </div>
-);
+
+
+
+// Styled-components for layout
+const AppLayout = styled.div`
+display: flex;
+flex-direction: column;
+height: 100vh;
+`;
+
+const ContentLayout = styled.div`
+display: flex;
+flex: 1;
+`;
+
+
+let chatstarted = false;
+
+const App = () => {
+  const buddies = ['Alice', 'Bob', 'Charlie'];
+
+  return (
+    <StyleSheetManager shouldForwardProp={shouldForwardProp}>
+        <div>
+            <GlobalStyles />
+            <ThemeProvider theme={original}>
+                <AppLayout>
+                    {/* Header Bar */}
+                    <AppBar>
+                        <Toolbar>
+                            <Button variant="menu">File</Button>
+                            <Button variant="menu">Edit</Button>
+                            <Button variant="menu">Help</Button>
+                        </Toolbar>
+                    </AppBar>
+
+                    <ContentLayout>
+                        {/* Buddy List */}
+                      <BuddyList buddies={buddies}/>
+                        {/* Chat Window */}
+                      <ChatWindow botType={""}/>
+                    </ContentLayout>
+                </AppLayout>
+            </ThemeProvider>
+        </div>
+    </StyleSheetManager>
+    )
+};
 
 export default App;
+

@@ -5,7 +5,8 @@ import {
     WindowContent,
     TextInput,
 } from 'react95';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
+import Draggable from 'react-draggable';
 import { styled } from 'styled-components';
 /* Pick a theme of your choice */
 
@@ -104,11 +105,12 @@ const ChatWindow = ({ botType }: {botType: string}) => {
             setCurrentMessage('');
         }
     };
-
+    const nodeRef = useRef(null);
     return (
         <>
-            <ChatWindowContainer style={{ width: '50%' }}>
-                <Window style={{ flex: 1, marginBottom: '10px' }}>
+            <Draggable nodeRef={nodeRef}>
+              <ChatWindowContainer ref={nodeRef}>
+                <Window style={{ flex: 1, marginBottom: '10px', width: '800px' }}>
                     <WindowHeader>Chat with Scenezuki</WindowHeader>
                     <WindowContent style={{ flex: 1, overflowY: 'auto' }}>
         {messages.map((message: {type: string, text: string}, index) => (
@@ -144,6 +146,7 @@ const ChatWindow = ({ botType }: {botType: string}) => {
                     <Button onClick={handleSend}>Send</Button>
                 </MessageInputContainer>
             </ChatWindowContainer>
+            </Draggable>
         </>
     )
 }
